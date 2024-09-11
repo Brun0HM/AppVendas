@@ -1,0 +1,53 @@
+﻿@model AppVendas.Models.Cliente
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Cliente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClienteNome" class="control-label"></label>
+                <input asp-for="ClienteNome" class="form-control" />
+                <span asp-validation-for="ClienteNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Celular" class="control-label"></label>
+                <input asp-for="Celular" class="form-control" />
+                <span asp-validation-for="Celular" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CadastroAtivo" /> @Html.DisplayNameFor(model => model.CadastroAtivo)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCadastro" class="control-label"></label>
+                <input asp-for="DataCadastro" class="form-control" />
+                <span asp-validation-for="DataCadastro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
