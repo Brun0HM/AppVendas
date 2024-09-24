@@ -50,8 +50,9 @@ namespace AppVendas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ClienteNome")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ClienteNome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");

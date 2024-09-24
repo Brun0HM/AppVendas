@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppVendas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240911185828_Criar")]
-    partial class Criar
+    [Migration("20240924120643_inicio")]
+    partial class inicio
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,8 +53,9 @@ namespace AppVendas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ClienteNome")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ClienteNome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");
