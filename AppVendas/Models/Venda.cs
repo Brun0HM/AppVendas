@@ -7,7 +7,7 @@
         public DateTime DataVenda { get; set; }
         public double? TotalVenda { get; set; }
         /* Referencia para a Model Cliente */
-        public Guid ClientesId { get; set; }
+        public Guid ClienteId { get; set; }
         public Cliente? Cliente { get; set; }
     }
 }

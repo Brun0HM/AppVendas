@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AppVendas.Data;
+using AppVendas.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AppVendas.Data;
-using AppVendas.Models;
 
 namespace AppVendas.Controllers
 {
@@ -22,7 +18,8 @@ namespace AppVendas.Controllers
         // GET: Vendas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Vendas.ToListAsync());
+            var applicationDbContext = _context.Vendas.Include(v => v.Cliente);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Vendas/Details/5
@@ -34,6 +31,7 @@ namespace AppVendas.Controllers
             }
 
             var venda = await _context.Vendas
+                .Include(v => v.Cliente)
                 .FirstOrDefaultAsync(m => m.VendaId == id);
             if (venda == null)
             {
@@ -46,6 +44,7 @@ namespace AppVendas.Controllers
         // GET: Vendas/Create
         public IActionResult Create()
         {
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId");
             return View();
         }
 
@@ -54,7 +53,7 @@ namespace AppVendas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("VendaId,NotaFiscal,DataVenda,TotalVenda,ClientesId")] Venda venda)
+        public async Task<IActionResult> Create([Bind("VendaId,NotaFiscal,DataVenda,TotalVenda,ClienteId")] Venda venda)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +62,7 @@ namespace AppVendas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", venda.ClienteId);
             return View(venda);
         }
 
@@ -79,6 +79,7 @@ namespace AppVendas.Controllers
             {
                 return NotFound();
             }
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", venda.ClienteId);
             return View(venda);
         }
 
@@ -87,7 +88,7 @@ namespace AppVendas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("VendaId,NotaFiscal,DataVenda,TotalVenda,ClientesId")] Venda venda)
+        public async Task<IActionResult> Edit(Guid id, [Bind("VendaId,NotaFiscal,DataVenda,TotalVenda,ClienteId")] Venda venda)
         {
             if (id != venda.VendaId)
             {
@@ -114,6 +115,7 @@ namespace AppVendas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ClienteId"] = new SelectList(_context.Clientes, "ClienteId", "ClienteId", venda.ClienteId);
             return View(venda);
         }
 
@@ -126,6 +128,7 @@ namespace AppVendas.Controllers
             }
 
             var venda = await _context.Vendas
+                .Include(v => v.Cliente)
                 .FirstOrDefaultAsync(m => m.VendaId == id);
             if (venda == null)
             {

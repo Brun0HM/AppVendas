@@ -7,6 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\ItensDaVenda\**" />
+    <Compile Remove="Views\Produtoes\**" />
+    <Content Remove="Views\ItensDaVenda\**" />
+    <Content Remove="Views\Produtoes\**" />
+    <EmbeddedResource Remove="Views\ItensDaVenda\**" />
+    <EmbeddedResource Remove="Views\Produtoes\**" />
+    <None Remove="Views\ItensDaVenda\**" />
+    <None Remove="Views\Produtoes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ItensDaVendaController.cs" />
+    <Compile Remove="Controllers\ProdutoesController.cs" />
+    <Compile Remove="Controllers\Vendas1Controller.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>

@@ -1,35 +1,39 @@
 ﻿@model IEnumerable<AppVendas.Models.Categoria>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Categorias";
 }
+<div class="d-flex justify-content-between my-5 align-items-center">
+    <span class="display-6  w-75 justify-contet-center">Cadastro de categorias</span>
 
-<h1>Index</h1>
+    <a asp-action="Create" class="btn btn-secondary px-5 w-25 d-flex align-items-center justify-content-center">
+        <ion-icon name="add-circle-outline" class="fs-4"></ion-icon><span class="fs-4 ms-2 fst-italic">Adicionar</span>
+    </a>
+</div>
+<div class="table-responsive">
+    <table class="table table-dark table-hover table-striped">
+        <thead>
+            <tr>
+                <th class="bg-black">
+                    @Html.DisplayNameFor(model => model.CategoriaNome)
+                </th>
+                <th class="bg-black"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoriaNome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CategoriaId" class="btn btn-outline-secondary align-items-center"> <ion-icon name="pencil-outline"></ion-icon>Editar</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoriaNome)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoriaNome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CategoriaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CategoriaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CategoriaId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        <a asp-action="Delete" asp-route-id="@item.CategoriaId" class="btn btn-outline-danger align-items-center ms-2"> <ion-icon name="trash-outline"></ion-icon>Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
