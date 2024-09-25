@@ -1,59 +1,63 @@
 ﻿@model IEnumerable<AppVendas.Models.Produto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cadastro de Produtos";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-between my-5 align-items-center">
+    <span class="display-6  w-75 justify-contet-center">Cadastro de Produtos</span>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProdutoNome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Valor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QtadeEstoque)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CadastroAtivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProdutoNome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QtadeEstoque)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CadastroAtivo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Categoria.CategoriaId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProdutoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ProdutoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProdutoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <a asp-action="Create" class="btn btn-secondary px-5 w-25 d-flex align-items-center justify-content-center">
+        <ion-icon name="add-circle-outline" class="fs-4"></ion-icon><span class="fs-4 ms-2 fst-italic">Adicionar</span>
+    </a>
+</div>
+<div class="table-responsive">
+    <table class="table table-dark table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="bg-black">
+                    @Html.DisplayNameFor(model => model.ProdutoNome)
+                </th>
+                <th class="bg-black">
+                    @Html.DisplayNameFor(model => model.Valor)
+                </th>
+                <th class="bg-black">
+                    @Html.DisplayNameFor(model => model.QtadeEstoque)
+                </th>
+                <th class="bg-black">
+                    @Html.DisplayNameFor(model => model.CadastroAtivo)
+                </th>
+                <th class="bg-black">
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th class="bg-black"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProdutoNome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QtadeEstoque)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CadastroAtivo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Categoria.CategoriaNome)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProdutoId" class="btn btn-outline-secondary align-items-center"> <ion-icon name="pencil-outline"></ion-icon>Editar</a>
+                        <a asp-action="Delete" asp-route-id="@item.ProdutoId" class="btn btn-outline-danger align-items-center ms-2"> <ion-icon name="trash-outline"></ion-icon>Delete</a>
+.                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
